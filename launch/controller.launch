@@ -1,0 +1,11 @@
+<launch>
+  <include file="$(find astra_launch)/launch/astra_pro.launch"/>
+  <node pkg="human_motion_capture" name="transform" type="transforms.py"/>
+  <include file="$(find human_motion_capture)/launch/orbbec_bundle.launch"/>
+  <node pkg="human_motion_capture" name="tracker" type="hand_locator" output="screen"/>
+  <!-- <node pkg="human_motion_capture" name="button" type="button_dummy.py"/> -->
+  <node pkg="human_motion_capture" name="controller" type="controller.py" output="screen"/>
+  <node pkg="human_motion_capture" name="image_saver"
+  type="image_point_recorder" output="screen"/>
+</launch>
+
