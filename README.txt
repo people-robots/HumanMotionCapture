@@ -1,3 +1,7 @@
+Environment:
+Ubuntu16
+ROS Kinetic
+
 Download packages and put them in ~/catkin_ws/src.
 The project package and packages include 
 OpenNI2
