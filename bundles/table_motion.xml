@@ -1,3 +1,10 @@
+
+<!-- detecting multiple markers 
+
+Identifying and tracking the pose of individual AR tags, optionally integrating kinect depth data (when a kinect is available) for better pose estimates.
+
+Identifying and tracking the pose of "bundles" consisting of multiple tags. This allows for more stable pose estimates, robustness to occlusions, and tracking of multi-sided objects.-->
+
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <multimarker markers="4">
     <marker index="0" status="1">

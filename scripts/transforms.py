@@ -8,7 +8,7 @@ import rospy
 import numpy as np
 from geometry_msgs.msg import PoseStamped
 from tf import *
-import tf
+import tf #The Transformer object is the heart of tf. It maintains an internal time-varying graph of transforms, and permits asynchronous graph modification and queries.
 from ar_track_alvar_msgs.msg import AlvarMarkers
 
 

@@ -1,3 +1,5 @@
+ <!-- This XML file is the package manifest. This file must be included with catkin-compliant package's root folder. This file defines properties about the package such as the package name, version numbers, authors, maintainers, and dependencies on other catkin packages -->
+
 <?xml version="1.0"?>
 <package>
   <name>human_motion_capture</name>

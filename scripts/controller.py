@@ -1,3 +1,6 @@
+#
+# A Python/OpenCV script that detect motion on webcam and allow record it to a file.
+#
 #!/usr/bin/env python
 from __future__ import print_function
 
@@ -5,24 +8,24 @@ import roslib
 #roslib.load_manifest('HamandiM')
 import sys
 import rospy
-import cv2
+import cv2 ## OpenCV (Open Source Computer Vision Library). need installation OpenCV? pip install opencv?
 import random
 import numpy as np
 import os
 import os.path
 #import os.makedirs
 import json
-from std_msgs.msg import String
-from sensor_msgs.msg import Image
-from geometry_msgs.msg import Pose
+from std_msgs.msg import String #Standard ROS Messages including common message types representing primitive data types and other basic message constructs
+from sensor_msgs.msg import Image #This package defines messages for commonly used sensors, including cameras and scanning laser rangefinders.
+from geometry_msgs.msg import Pose 
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import AccelStamped
 from std_msgs.msg import Bool
 from std_msgs.msg import String
-import matplotlib.pyplot as plt
-import rospkg
+import matplotlib.pyplot as plt #matplotlib.pyplot is a state-based interface to matplotlib. It provides a MATLAB-like way of plotting.
+import rospkg #The rospkg Python module provides basic utilities for querying information about ROS packages, stacks, and distributions. 
 from metadata import *
 
 class controller_node:
@@ -32,10 +35,10 @@ class controller_node:
       self.file_name ='';
       self.target_dir = "";
       self.recorder = [];
-      self.font = cv2.FONT_HERSHEY_SIMPLEX;
+      self.font = cv2.FONT_HERSHEY_SIMPLEX;  # Creates a font
       self.rows = ['A','B','C','D','E','F','G','H','I','J','K'];
       self.cols = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
-      self.empty_image = np.ones((200,400,3),np.uint8)*255;
+      self.empty_image = np.ones((200,400,3),np.uint8)*255; # Return a new array of given shape and type, filled with ones.
       cv2.namedWindow("The Target");
       self.is_displayed = False;
       self.pack = rospkg.RosPack();
@@ -49,7 +52,7 @@ class controller_node:
       self.target_pub =rospy.Publisher("/target_loc",String,
               queue_size=10);
       self.change_target();
-      self.button_sub = rospy.Subscriber("/button",Bool, self.button_callback);
+      self.button_sub = rospy.Subscriber("/button",Bool, self.button_callback); #Class for registering as a subscriber to a specified topic, where the messages are of a given type.
       self.loc_sub = rospy.Subscriber("/right_hand/position/final",PoseStamped, self.vision_callback);
       self.acc_sub = rospy.Subscriber("/right_hand/acceleration",AccelStamped, self.acc_callback);
 
@@ -69,6 +72,7 @@ class controller_node:
               self.target_pub.publish(self.target_dir);
               self.button_last = True;
 
+#create record of positions
   def vision_callback(self, position):
       if self.button_last == True:
           new_data = {};
@@ -148,7 +152,7 @@ class controller_node:
       self.target_dir = target_dir;
       self.file_name = str(self.path + "/data/" + target+'.json')
       self.is_displayed = False;
-      meta_counter(target,metadata_file);
+      meta_counter(target,metadata_file); # metadata.py
       #self.display_target()
 
   def display_target(self):
@@ -160,7 +164,7 @@ class controller_node:
 def main(args):
     rospy.init_node('Control_node', anonymous=True)
     recorder_node = controller_node()
-    rate = rospy.Rate(100)
+    rate = rospy.Rate(100) #100hz
     while not rospy.is_shutdown():
         if recorder_node.is_displayed == False:
             recorder_node.display_target();
